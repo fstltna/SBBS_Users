@@ -1,0 +1,35 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use Getopt::Long;
+
+# Globals
+my $FingerCommand = "/usr/bin/finger";
+my $HostName = $ARGV[0];# The host name to connect to
+my $PollTime = 60;	# Sleep 60 secs between polls
+
+if ((@ARGV < 1) || (@ARGV > 2))
+{
+	print "Invalid arguments - Must specify BBS host name and optional poll time:\n";
+	print "sbbsusers <hostname> [polltime]\n";
+	exit 1;
+}
+
+while(-1)
+{
+	# Clear the screen
+	system("clear");
+	# Run finger command
+	open(my $fh, '-|', "$FingerCommand \@$HostName") or die $!;
+	while (my $line = <$fh>)
+	{
+	    # Do stuff with each $line.
+		chop($line);
+		print "$line\n";
+	}
+	close($fh);
+	sleep ($PollTime);
+}
+exit 0;
+
