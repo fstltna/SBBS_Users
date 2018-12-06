@@ -1,4 +1,5 @@
-# SBBS_Users
+# SBBS_Users (1.0.0)
+
 Displays the users logged in to your Synchronet BBS
 
 ***
